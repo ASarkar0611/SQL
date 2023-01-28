@@ -39,4 +39,3 @@ FROM discs;
 -- OR
 SELECT ROUND(EXP(SUM(LOG(CHAR_LENGTH(characters))))) AS combinations
     FROM discs;
-
