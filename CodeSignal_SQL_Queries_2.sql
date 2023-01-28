@@ -20,3 +20,23 @@ SELECT id,login,name
 
 SELECT count(*) AS number_of_nulls FROM departments
 	WHERE trim(description) IN ('null', 'nil', '-') OR description IS NULL;
+
+-- Question: You want to calculate the total number of legs in the meadow. Given the table creatures, build a new
+-- table that only contains one column summary_legs and has only one row with the total number of legs that you can see.
+
+SELECT sum(IF(type='human',2,4)) as summary_legs
+    FROM creatures
+    ORDER BY id;
+
+-- Question: The combination lock consists of several rotating discs, where each disc has its own set of possible
+-- characters. You have a table discs which stores the information about these discs
+-- Calculate the total number of all possible combinations that the lock has, and return it as a table that has
+-- only one column combinations and one row.
+
+SET @comb = 1;
+SELECT max(@comb:= @comb*length(characters)) as combinations
+FROM discs;
+-- OR
+SELECT ROUND(EXP(SUM(LOG(CHAR_LENGTH(characters))))) AS combinations
+    FROM discs;
+
